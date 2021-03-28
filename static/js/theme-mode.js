@@ -1,3 +1,11 @@
+function switchTheme() {
+  const currentTheme = getCurrentTheme();
+  if (currentTheme == 'light') {
+    setTheme('dark');
+  } else {
+    setTheme('light');
+  }
+}
 
 function setTheme(style) {
   document.querySelectorAll('.isInitialToggle').forEach(elem => {
