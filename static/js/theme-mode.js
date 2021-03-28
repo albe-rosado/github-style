@@ -1,12 +1,3 @@
-function switchTheme(currentTheme) {
-
-  if (currentStyle == 'light') {
-    setTheme('dark');
-  }
-  else {
-    setTheme('light');
-  }
-}
 
 function setTheme(style) {
   document.querySelectorAll('.isInitialToggle').forEach(elem => {
@@ -24,7 +15,7 @@ function getCurrentTheme() {
 
 function detectTheme() {
   if(window.matchMedia) {
-    switchTheme(getCurrentTheme());
+    setTheme(getCurrentTheme());
 
     // listen for theme changes
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener(e => {
