@@ -1,5 +1,4 @@
-function switchTheme() {
-  const currentStyle = currentTheme();
+function switchTheme(currentTheme) {
 
   if (currentStyle == 'light') {
     setTheme('dark');
@@ -17,12 +16,27 @@ function setTheme(style) {
   localStorage.setItem('data-color-mode', style);
 }
 
-function currentTheme() {
+function getCurrentTheme() {
   const localStyle = localStorage.getItem('data-color-mode');
   const systemStyle = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   return localStyle || systemStyle;
 }
 
+function detectTheme() {
+  if(window.matchMedia) {
+    switchTheme(getCurrentTheme());
+
+    // listen for theme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener(e => {
+      if(e.matches) {
+        setTheme('dark');
+      } else {
+        setTheme('light');
+      }
+    })
+  }
+}
+
 (() => {
-  setTheme(currentTheme());
+  detectTheme();
 })();

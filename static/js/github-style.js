@@ -29,7 +29,7 @@ function switchYear(year) {
   let startDate;
   let endDate;
   if (year != now.getFullYear().toString()) {
-    const date = new Date(`${year}-01-01 00:00:00`);
+    const date = new Date(`${year}-01-10T21:00:00-00:00`);
     startDate = new Date(date.getFullYear(), 0, 1);
     endDate = new Date(date.getFullYear(), 11, 31);
   } else {
