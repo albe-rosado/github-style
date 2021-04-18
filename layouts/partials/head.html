@@ -1,15 +1,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <meta name="baidu-site-verification" content="code-xgYk4U0Az0" />
     <script defer async type="application/javascript" src='{{ "js/theme-mode.js" | absURL }}'></script>
     <script defer async src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-    <link rel="stylesheet" href='{{ "css/frameworks.min.css" | absURL }}' />
-    <link rel="stylesheet" href='{{ "css/github.min.css" | absURL }}' />
-    <link rel="stylesheet" href='{{ "css/github-style.css" | absURL }}' />
-    <link rel="stylesheet" href='{{ "css/light.css" | absURL }}' />
-    <link rel="stylesheet" href='{{ "css/dark.css" | absURL }}' />
-    <link rel="stylesheet" href='{{ "css/syntax.css" | absURL }}' />
+    {{ $style := resources.Get "css/styles.css" | postCSS (dict "config" "./postcss.config.js")  | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $style.Permalink }}" integrity="{{ $style.Data.Integrity }}">
     <title>{{ if .IsHome }}{{ else }}{{ .Title }} - {{ end }}{{ .Site.Title }}</title>
     {{ if .Site.Params.favicon }}
     <link rel="icon" type="image/x-icon" href='{{ .Site.Params.favicon  }}'>
@@ -17,7 +12,6 @@
     <link rel="icon" type="image/x-icon" href='{{ "images/favicon.ico" | absURL }}'>
     {{ end }}
     <meta name="theme-color" content="#1e2327">
-
     <!-- Extended head section-->
     {{ partial "extended_head.html" . }}
 </head>
